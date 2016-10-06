@@ -1,0 +1,1 @@
+mvn -B archetype:generate -DarchetypeArtifactId=wildfly-javaee7-webapp-archetype -DarchetypeGroupId=org.wildfly.archetype  -DarchetypeVersion=8.2.0.Final -DgroupId=net.bestetti.stocks -DartifactId=web
