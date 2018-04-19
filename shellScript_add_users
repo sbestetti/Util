@@ -1,0 +1,12 @@
+$Users = Import-Csv -Path "C:\users.csv"            
+foreach ($User in $Users)            
+{            
+    $Displayname = $User.First + " " + $User.Last            
+    $UserFirstname = $User.First            
+    $UserLastname = $User.Last            
+    $OU = "OU=Distilled,DC=distilled,DC=local"            
+    $SAM = $User.Login            
+    $UPN = $User.Login + "@distilled.ie"      
+    $Password = $User.Password            
+    New-ADUser -Name "$Displayname" -DisplayName "$Displayname" -SamAccountName $SAM -UserPrincipalName $UPN -GivenName "$UserFirstname" -Surname "$UserLastname" -AccountPassword (ConvertTo-SecureString $Password -AsPlainText -Force) -Enabled $true -Path "$OU" -ChangePasswordAtLogon $false -server distilled.local            
+}
